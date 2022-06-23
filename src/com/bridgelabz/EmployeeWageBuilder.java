@@ -44,8 +44,8 @@ public class EmployeeWageBuilder {
 
     public static void main(String[] args) {
         computeEmpWage("Bridgelabz", 20, 20, 200);
-        computeEmpWage("HCL", 30, 30, 300);
-        computeEmpWage("TCS", 50, 20, 220);
+        computeEmpWage("HCL", 70, 30, 301);
+        computeEmpWage("TCS", 60, 30, 230);
 
     }
 }
