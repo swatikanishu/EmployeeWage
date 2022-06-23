@@ -2,25 +2,34 @@ package com.bridgelabz;
 import java.util.Random;
 
 public class EmployeeWageBuilder {
+    final   static  int FULL_TIME_WORKER=1;
+    final static  int PART_TIME_WORKER=2;
     public static void main(String[] args) {
         System.out.println("Welcome to Employee Wage Builder");
-        int IS_fULL_tIME = 1;
         int EMP_RATE_PER_HOUR=20;
         int empHours=0;
         int empWage=0;
+
         Random random = new Random();
         int empCheck = random.nextInt(2);
 
-        if (empCheck == IS_fULL_tIME) {
-            System.out.println("Employee is present");
-            empHours=8;
-        }
-        else {
-            System.out.println("Employee is absent");
-            empHours=4;
 
+        switch(empCheck){
+            case FULL_TIME_WORKER:
+                empHours=8;
+                System.out.println("Employee is present");
+                break;
+            case PART_TIME_WORKER:
+                empHours=4;
+                System.out.println("Employee is present");
+                break;
+            default:
+
+                System.out.println("Employee is absent");
         }
+
         empWage=empHours*EMP_RATE_PER_HOUR;
-        System.out.println("The daliy wage of Empolyee is" + empWage);
+        System.out.println("The daily wage of Employee is" + empWage);
     }
 }
+
