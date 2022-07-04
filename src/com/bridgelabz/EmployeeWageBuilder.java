@@ -2,6 +2,7 @@ package com.bridgelabz;
 import java.util.Random;
 
 public class EmployeeWageBuilder {
+    // instance variables
     private  String company;
     static int EMP_RATE_PER_HOUR;
     static  int workingDaysPerMonth;
@@ -59,12 +60,11 @@ public class EmployeeWageBuilder {
     public static void main(String args[]) {
         //Welcome message
         System.out.println("Welcome to Employee Wage Builder. \n");
-        EmployeeWageBuilder company1 = new EmployeeWageBuilder("SBI", 20, 20, 100);
+        EmployeeWageBuilder company1 = new EmployeeWageBuilder("TATA", 20, 20, 100);
         company1.companyWage();
-        EmployeeWageBuilder company2 = new EmployeeWageBuilder("ACCENTURE", 20, 20, 200);
+        EmployeeWageBuilder company2 = new EmployeeWageBuilder("HDFC", 15, 26, 200);
         company2.companyWage();
         System.out.println(company1);
         System.out.println(company2);
     }
 }
-

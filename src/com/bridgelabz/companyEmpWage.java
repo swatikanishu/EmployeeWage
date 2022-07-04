@@ -1,14 +1,6 @@
 package com.bridgelabz;
-interface IEmpWageBuilder {
-    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
-    public void companyWage();
-    public  void printtotalwage();
-    public static int getTotalWage(String companyName){
-        return 0;
-    }
-}
 
-public class CompanyWage {
+public class companyEmpWage {
     // declaring instance variables
     final String COMPANY_NAME;
     final int WAGE_PER_HR;
@@ -16,8 +8,8 @@ public class CompanyWage {
     final int MAX_WORKING_HRS;
     // instance variable
     int totalEmpWage;
-
-    public  CompanyWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
+    //Constructor
+    public companyEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
         COMPANY_NAME = companyName;
         WAGE_PER_HR = wagePerHr;
         MAX_WORKING_DAYS = maxWorkingDays;
