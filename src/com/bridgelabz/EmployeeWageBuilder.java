@@ -1,70 +1,72 @@
 package com.bridgelabz;
 import java.util.Random;
-
+import java.util.ArrayList;
 public class EmployeeWageBuilder {
-    // instance variables
-    private  String company;
-    static int EMP_RATE_PER_HOUR;
-    static  int workingDaysPerMonth;
-    static  int maxWorkingHours;
-    private int totalEmpWage;
+    public class EmployeeWageBuilder  implements IEmpWageBuilder {
+        // instance variables
+        int noOfCompanies, index;
+        ArrayList<companyEmpWage> companies; //ArrayList declaration
 
-
-
-    //Constructor for the class EmpWageBuilder
-    public EmployeeWageBuilder(String company, int EMP_RATE_PER_HOUR, int workingDaysPerMonth, int maxWorkingHours){
-        this.company = company;
-        this.EMP_RATE_PER_HOUR = EMP_RATE_PER_HOUR;
-        this.workingDaysPerMonth = workingDaysPerMonth;
-        this.maxWorkingHours = maxWorkingHours;
-    }
-    //Computation of company wage
-    public void companyWage(){
-        System.out.printf("%s Employee Wage details: ", company).println();
-        //local variables
-        int empWage = 0, totalWage=0, workingHours = 0, empHours = 0;
-        Random random = new Random();
-        //Calculating the total wage per month using loops
-        for (int day = 1; day<=workingDaysPerMonth && workingHours<maxWorkingHours; day++) {
-            //Max Working hours should be 100.
-            int empCheck = random.nextInt(3);
-            switch (empCheck) {
-                case 1:
-                    System.out.printf("Day %d: Employee is Present for full day.", day).println();
-                    empHours = 8;
-                    break;
-                case 2:
-                    System.out.printf("Day %d: Employee worked for half day.", day).println();
-                    empHours = 4;
-                    break;
-                default:
-                    System.out.printf("Day %d: Employee is Absent.", day).println();
-                    empHours = 0;
-                    break;
-            }
-            empWage = empHours * EMP_RATE_PER_HOUR;
-            System.out.printf("Worked:"+empHours+"hours, Wage:$" +empWage).println("\n");
-            totalWage += empWage;
-            workingHours += empHours; //Max Working Hours is 100, loop terminates if it is above 100.
+        // contructor for EmpWageBuilder  class
+        public EmployeeWageBuilder() {
+            companies = new ArrayList<>();
         }
-        totalEmpWage = workingHours*EMP_RATE_PER_HOUR;
-        System.out.printf("The Total wage of "+company+ "for this month: $ " + totalWage).println();
-        System.out.printf("Total hours of working for "+company+": " + workingHours ).println();
-        System.out.println();
+
+
+        //Assigning to the array
+        public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
+            companyEmpWage company = new companyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
+            companies.add(company);
+        }
+
+        //print company wage
+        int companyWage(companyEmpWage companyEmpWage) {
+            System.out.println("* Total wage of " + companyEmpWage.COMPANY_NAME + " employee:");
+            int workingHrs, totalWage = 0;
+            for (int day = 1, totalWorkingHrs = 0; day <= companyEmpWage.MAX_WORKING_DAYS
+                    && totalWorkingHrs <= companyEmpWage.MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs) {
+                int empType = generateEmployeeType(); //random value(0,1,2)
+                workingHrs = getWorkingHrs(empType); //Full time, Part time or Absent
+                int wage = workingHrs * companyEmpWage.WAGE_PER_HR;
+                totalWage += wage;
+                System.out.print("\n Day " + day + ": Working hrs -" + workingHrs + ", Total Wage -" + wage + ", Total working hour -" + totalWorkingHrs + "\n");
+            }
+            return totalWage;
+        }
+
+        int generateEmployeeType() {
+            Random random = new Random();
+            return random.nextInt(3);
+        }
+
+        int getWorkingHrs(int empType) {
+            switch (empType) {
+                case 1:
+                    return 8; //Full time
+                case 2:
+                    return 4; //Part time
+                default:
+                    return 0; //Absent
+            }
+        }
+
+        public void companyWage() {
+            for (companyEmpWage company : companies) //for-each loop
+            {
+                int totalWage = companyWage(company);
+                company.setTotalEmployeeWage(totalWage);
+                System.out.println(company); //overriding the toString() method
+            }
+        }
+
+        //Starting of main method.
+        public static void main(String args[]) {
+            //Welcome message
+            System.out.println("Welcome to Employee Wage Builder. \n");
+            EmployeeWageBuilder employee = new EmployeeWageBuilder(); //creating an object and declaring number of companies = 3
+            employee.addCompany("Bridgeabz", 20, 20, 100);
+            employee.addCompany("TATA", 34, 23, 130);
+            employee.addCompany("BAJAJ", 10, 15, 99);
+            employee.companyWage();
+        }
     }
-    //overriding the toString() method
-    public String toString(){
-        return "Total wage  for the Company " + company + " is: " + totalEmpWage;
-    }
-    //Starting of main method.
-    public static void main(String args[]) {
-        //Welcome message
-        System.out.println("Welcome to Employee Wage Builder. \n");
-        EmployeeWageBuilder company1 = new EmployeeWageBuilder("TATA", 20, 20, 100);
-        company1.companyWage();
-        EmployeeWageBuilder company2 = new EmployeeWageBuilder("HDFC", 15, 26, 200);
-        company2.companyWage();
-        System.out.println(company1);
-        System.out.println(company2);
-    }
-}
