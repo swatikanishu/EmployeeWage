@@ -1,5 +1,9 @@
 package com.bridgelabz;
 
+interface IEmpWageBuilder {
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
+    public void companyWage();
+}
 public class companyEmpWage {
     // declaring instance variables
     final String COMPANY_NAME;
@@ -9,7 +13,7 @@ public class companyEmpWage {
     // instance variable
     int totalEmpWage;
     //Constructor
-    public companyEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
+    public  companyEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
         COMPANY_NAME = companyName;
         WAGE_PER_HR = wagePerHr;
         MAX_WORKING_DAYS = maxWorkingDays;
@@ -28,4 +32,3 @@ public class companyEmpWage {
         return "Total wage in a month for " + COMPANY_NAME + " Company is " + totalEmpWage + "\n";
     }
 }
-
