@@ -12,6 +12,8 @@ public class companyEmpWage {
     final String COMPANY_NAME;
     final int WAGE_PER_HR;
     final int MAX_WORKING_DAYS;
+
+
     final int MAX_WORKING_HRS;
     // instance variable
     int totalEmpWage;
