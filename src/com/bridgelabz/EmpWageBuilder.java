@@ -85,6 +85,8 @@ public class EmpWageBuilder  implements IEmpWageBuilder {
     }
 
     //Starting of main method.
+
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         //Welcome message
